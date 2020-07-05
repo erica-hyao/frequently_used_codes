@@ -6,6 +6,10 @@ class TreeNode:
 
 class Solution:
     def InOrderTraversal(self,root):
+        """
+        :type root: TreeNode
+        :rtype: List[List[int]]
+        """
         if not root:
             return []
         dummy = TreeNode(0)
@@ -25,6 +29,10 @@ class Solution:
         return InOrder
 
     def PreOrderTraversal(self,root):
+        """
+        :type root: TreeNode
+        :rtype: List[List[int]]
+        """
         PreOrder = []
         if not root:
             return PreOrder
@@ -34,3 +42,26 @@ class Solution:
         PreOrder.append(left)
         PreOrder.append(right)
         return PreOrder
+    
+    def LevelOrderTraversal(self,root):
+        """
+        :type root: TreeNode
+        :rtype: List[List[int]]
+        """
+        if not root:
+            return []
+        from collections import deque
+        queue = deque([root])
+        LevelOrder = []
+        while queue:
+            level = []
+            # return: [[1],[2,3]], so we need to use the for loop
+            for _ in range(len(queue)):
+                node = queue.popleft()
+                level.append(node.val)
+                if node.left:
+                    queue.append(node.left)
+                if node.right:
+                    queue.append(node.right)
+            LevelOrder.append(level)
+        return LevelOrder
